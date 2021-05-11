@@ -1,4 +1,5 @@
 # NodeJs-ExpressJs-Full-Ecommerce-app
+# NodeJs Application using ExpressJs, Ejs.
 
 ## install dependencies
 npm install
