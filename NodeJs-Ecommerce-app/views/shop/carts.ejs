@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> <%= pageTitle %> </title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    <%- include('../includes/navigations') %>
+    <main>
+        <% if (products.length > 0) { %>
+            <ul class="cart__item-list">
+                <% products.forEach(p => { %>
+                    <li class="cart__item">
+                        <h1><%= p.productId.title %></h1>
+                        <h2>Quantity: <%= p.quantity %></h2>
+                        <form action="/cart-delete-item" method="POST">
+                            <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                            <button class="btn danger" type="submit">Delete</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+            <hr>
+            <div class="centered">
+                <form action="/create-order" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn">Order Now!</button>
+                </form>
+            </div>
+            
+        <% } else { %>
+            <h1>No Products in Cart!</h1>
+        <% } %> 
+    </main>
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
